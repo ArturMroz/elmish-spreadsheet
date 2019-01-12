@@ -46,6 +46,6 @@ let parse input = run equation input
 
 let rec evaluate (cells:Map<Position, string>) expr = 
   match expr with
-  | Number num -> 0 
-  | Binary(l, op, r) -> 1
-  | Reference pos -> 2
+  | Number num -> Some num 
+  | Binary(l, op, r) -> Some 1
+  | Reference pos -> cells |> Map.tryFind pos |> Option.map int
